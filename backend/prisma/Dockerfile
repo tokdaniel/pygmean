@@ -1,4 +1,4 @@
-FROM node:13.5.0-alpine
+FROM node:13.5.0
 RUN npm install -g --unsafe-perm prisma2
 
 RUN mkdir /app
