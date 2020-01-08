@@ -2,8 +2,6 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
 import {
   ThemeProvider,
-  withStyles,
-  WithStyles,
 } from '@material-ui/core/styles'
 import { NextPage } from 'next'
 import React from 'react'
@@ -11,14 +9,12 @@ import Content from '~/components/content'
 import Copyright from '~/components/copyright'
 import Header from '~/components/header'
 import Navigator from '~/components/navigator'
-import styles, { drawerWidth } from './admin.styles'
+import useStyles, { drawerWidth } from './admin.styles'
 import theme from './admin.theme'
+import protect from  '~/utils/protected-page'
 
-export interface AdminPageProps extends WithStyles<typeof styles> {
-}
-
-const AdminPage: NextPage<AdminPageProps> = (props: AdminPageProps) => {
-  const { classes } = props
+const AdminPage: NextPage = () => {
+  const classes = useStyles()
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
   const handleDrawerToggle = () => {
@@ -56,4 +52,11 @@ const AdminPage: NextPage<AdminPageProps> = (props: AdminPageProps) => {
   )
 }
 
-export default withStyles(styles)(AdminPage)
+AdminPage.getInitialProps = () => {
+
+  return {
+    something: 'something'
+  }
+}
+
+export default protect(AdminPage, ['Admin'])

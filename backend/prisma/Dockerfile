@@ -6,7 +6,6 @@ WORKDIR /app
 
 COPY ./ ./prisma/
 
-RUN npm init -y
 RUN npm install @prisma/photon
 
 CMD [ "prisma2", "dev" ]

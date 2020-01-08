@@ -14,4 +14,8 @@ export const permissions = shield({
     users: rules.everyone,
     me: rules.isAuthenticatedUser,
   },
+  Mutation: {
+    login: rules.everyone,
+    signup: rules.everyone
+  }
 })

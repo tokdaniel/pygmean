@@ -1,3 +1,4 @@
+import { useMutation } from '@apollo/react-hooks'
 import Avatar from '@material-ui/core/Avatar'
 import Box from '@material-ui/core/Box'
 import Button from '@material-ui/core/Button'
@@ -10,12 +11,36 @@ import Link from '@material-ui/core/Link'
 import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
-import React from 'react'
+import { gql } from 'apollo-boost'
+import React, { useState } from 'react'
 import Copyright from '~/components/copyright'
+import { FormEvent } from '~/node_modules/@types/react'
+import { NextPage } from '~/node_modules/next'
 import useStyles from './sign-in.styles'
 
-const SignIn = () => {
+const LOGIN_MUTATION = gql`
+    mutation($email: String!, $password: String!) {
+        login(password: $password, email: $email) {
+            token
+        }
+    }
+`
+
+const onSubmit = (handler: any) => (e: FormEvent) => {
+  e.preventDefault()
+  handler().catch(console.log)
+}
+
+const Login: NextPage = () => {
   const classes = useStyles()
+
+  const [login, { data, error }] = useMutation(LOGIN_MUTATION)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  if (data) {
+    localStorage.setItem('token', data.login.token)
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -25,10 +50,15 @@ const SignIn = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Login
         </Typography>
-        <form className={ classes.form } noValidate>
+        <form className={ classes.form } noValidate
+              onSubmit={ onSubmit(() => login({ variables: { email, password } })) }>
           <TextField
+            error={ Boolean(error) }
+            helperText={ error?.graphQLErrors[0].message }
+            value={ email }
+            onChange={ (e) => setEmail(e.target.value) }
             variant="outlined"
             margin="normal"
             required
@@ -40,6 +70,8 @@ const SignIn = () => {
             autoFocus
           />
           <TextField
+            value={ password }
+            onChange={ (e) => setPassword(e.target.value) }
             variant="outlined"
             margin="normal"
             required
@@ -70,7 +102,7 @@ const SignIn = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/sign-up" variant="body2">
                 { "Don't have an account? Sign Up" }
               </Link>
             </Grid>
@@ -84,4 +116,4 @@ const SignIn = () => {
   )
 }
 
-export default SignIn
+export default Login

@@ -1,11 +1,10 @@
 import {
-  createStyles,
+  makeStyles,
 } from '@material-ui/core'
-import theme from './admin.theme'
 
 export const drawerWidth = 256
 
-export default createStyles({
+export default makeStyles(theme =>({
   root: {
     display: 'flex',
     minHeight: '100vh',
@@ -30,4 +29,4 @@ export default createStyles({
     padding: theme.spacing(2),
     background: '#eaeff1',
   },
-})
+}))

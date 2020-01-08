@@ -23,6 +23,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  Role: photon.Role
 }
 
 export interface NexusGenRootTypes {
@@ -41,6 +42,7 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
+  Role: NexusGenEnums['Role'];
 }
 
 export interface NexusGenFieldTypes {
@@ -60,6 +62,7 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // ID!
     name: string | null; // String
+    role: NexusGenEnums['Role']; // Role!
   }
 }
 
@@ -95,7 +98,7 @@ export type NexusGenObjectNames = "AuthPayload" | "Mutation" | "Query" | "User";
 
 export type NexusGenInputNames = never;
 
-export type NexusGenEnumNames = never;
+export type NexusGenEnumNames = "Role";
 
 export type NexusGenInterfaceNames = never;
 

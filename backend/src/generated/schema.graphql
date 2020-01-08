@@ -17,8 +17,14 @@ type Query {
   users(after: ID, before: ID, first: Int, last: Int, skip: Int): [User!]!
 }
 
+enum Role {
+  Admin
+  User
+}
+
 type User {
   email: String!
   id: ID!
   name: String
+  role: Role!
 }
