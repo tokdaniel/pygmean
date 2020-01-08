@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`With Snapshot Testing Runs 1`] = `
-<div>
-  Something
-</div>
-`;

@@ -75,6 +75,7 @@ const featuredPosts = [
 const Blog: NextPage = () => {
   const classes = useStyles()
 
+
   return (
     <>
       <Container maxWidth="lg">
