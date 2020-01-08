@@ -19,6 +19,7 @@ export const Mutation = mutationType({
             name,
             email,
             password: hashedPassword,
+            role: 'User'
           },
         })
         return {

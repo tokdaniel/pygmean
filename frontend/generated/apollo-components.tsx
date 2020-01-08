@@ -53,11 +53,17 @@ export type QueryUsersArgs = {
   last?: Maybe<Scalars['Int']>
 };
 
+export enum Role {
+  Admin = 'Admin',
+  User = 'User'
+}
+
 export type User = {
    __typename?: 'User',
   id: Scalars['ID'],
   name?: Maybe<Scalars['String']>,
   email: Scalars['String'],
+  role: Role,
 };
 
 export type UserFragmentFragment = (
