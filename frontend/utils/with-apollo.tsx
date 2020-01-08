@@ -7,7 +7,7 @@ import Head from "next/head"
 import PropTypes from "prop-types"
 import React from "react"
 import { getDataFromTree } from "react-apollo"
-import initApollo from '../config/init-apollo'
+import initApollo from '~/config/init-apollo'
 import { isBrowser } from "./is-browser"
 
 function parseCookies(req?: any, options = {}) {

@@ -1,37 +1,23 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
-import Link from '@material-ui/core/Link'
 import {
   ThemeProvider,
   withStyles,
   WithStyles,
 } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import { NextPage } from 'next'
 import React from 'react'
-import Content from '../../components/content'
-import Header from '../../components/header'
-import Navigator from '../../components/navigator'
+import Content from '~/components/content'
+import Copyright from '~/components/copyright'
+import Header from '~/components/header'
+import Navigator from '~/components/navigator'
 import styles, { drawerWidth } from './admin.styles'
 import theme from './admin.theme'
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      { 'Copyright © ' }
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{ ' ' }
-      { new Date().getFullYear() }
-      { '.' }
-    </Typography>
-  )
+export interface AdminPageProps extends WithStyles<typeof styles> {
 }
 
-export interface PaperbaseProps extends WithStyles<typeof styles> {
-}
-
-const  AdminPage: NextPage<PaperbaseProps> = (props: PaperbaseProps) => {
+const AdminPage: NextPage<AdminPageProps> = (props: AdminPageProps) => {
   const { classes } = props
   const [mobileOpen, setMobileOpen] = React.useState(false)
 
