@@ -56,7 +56,7 @@ const Login: NextPage = () => {
         <form className={ classes.form } noValidate
               onSubmit={ onSubmit(() => login({ variables: { email, password } })) }>
           <TextField
-            error={ Boolean(error) }
+            error={ error?.graphQLErrors[0].message.includes('email')}
             helperText={ error?.graphQLErrors[0].message }
             value={ email }
             onChange={ (e) => setEmail(e.target.value) }
@@ -71,6 +71,8 @@ const Login: NextPage = () => {
             autoFocus
           />
           <TextField
+            error={ error?.graphQLErrors[0].message.includes('password')}
+            helperText={ error?.graphQLErrors[0].message }
             value={ password }
             onChange={ (e) => setPassword(e.target.value) }
             variant="outlined"
