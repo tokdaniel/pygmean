@@ -4,6 +4,7 @@ import { Role } from '~/generated/apollo-components'
 import { NextPage } from '~/node_modules/next'
 import redirect from '~/utils/redirect'
 import { parseCookies } from '~/utils/with-apollo'
+import paths from '~/config/paths'
 
 
 const GET_USER_ROLE = gql`
@@ -32,7 +33,7 @@ export default (Page: NextPage<any>, allow: Role[]) => {
       const { data } = await apolloClient.query({ query: GET_USER_ROLE })
 
       if (!allow.includes(data.me.role as Role)) {
-        redirect(ctx, '/401')
+        redirect(ctx, paths.NOT_FOUND)
       }
 
       return {
@@ -40,7 +41,7 @@ export default (Page: NextPage<any>, allow: Role[]) => {
       }
     } catch (e) {
       console.log('error: ', e.graphQLErrors[0])
-      redirect(ctx, '/login')
+      redirect(ctx, paths.LOGIN)
     }
   }
 
