@@ -12,12 +12,16 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import { gql } from 'apollo-boost'
+import cookie from 'cookie'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import Copyright from '~/components/copyright'
+import paths from '~/config/paths'
 import { FormEvent } from '~/node_modules/@types/react'
 import { NextPage } from '~/node_modules/next'
+import redirect from '~/utils/redirect'
+import { parseCookies } from '~/utils/with-apollo'
 import useStyles from './sign-in.styles'
-import cookie from 'cookie'
 
 const LOGIN_MUTATION = gql`
     mutation($email: String!, $password: String!) {
@@ -34,6 +38,7 @@ const onSubmit = (handler: any) => (e: FormEvent) => {
 
 const Login: NextPage = () => {
   const classes = useStyles()
+  const router = useRouter()
 
   const [login, { data, error }] = useMutation(LOGIN_MUTATION)
   const [email, setEmail] = useState('')
@@ -41,6 +46,7 @@ const Login: NextPage = () => {
 
   if (data) {
     document.cookie = cookie.serialize('token', data.login.token)
+    router.push(paths.HOME)
   }
 
   return (
@@ -56,7 +62,7 @@ const Login: NextPage = () => {
         <form className={ classes.form } noValidate
               onSubmit={ onSubmit(() => login({ variables: { email, password } })) }>
           <TextField
-            error={ error?.graphQLErrors[0].message.includes('email')}
+            error={ error?.graphQLErrors[0].message.includes('email') }
             helperText={ error?.graphQLErrors[0].message }
             value={ email }
             onChange={ (e) => setEmail(e.target.value) }
@@ -71,7 +77,7 @@ const Login: NextPage = () => {
             autoFocus
           />
           <TextField
-            error={ error?.graphQLErrors[0].message.includes('password')}
+            error={ error?.graphQLErrors[0].message.includes('password') }
             helperText={ error?.graphQLErrors[0].message }
             value={ password }
             onChange={ (e) => setPassword(e.target.value) }
@@ -117,6 +123,15 @@ const Login: NextPage = () => {
       </Box>
     </Container>
   )
+}
+
+Login.getInitialProps = async (ctx) => {
+  const token = parseCookies(ctx.req).token
+
+  if (token) {
+    redirect(ctx, paths.HOME)
+  }
+  return {}
 }
 
 export default Login
