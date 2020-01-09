@@ -22,7 +22,6 @@ interface Options {
 function create(initialState: any, { getToken }: Options) {
   const httpLink = createHttpLink({
     uri: isBrowser ? 'http://localhost:4000/' : 'http://backend:4000',
-    credentials: 'include',
   })
 
   const authLink = setContext((_, { headers }) => {
@@ -30,7 +29,7 @@ function create(initialState: any, { getToken }: Options) {
     return {
       headers: {
         ...headers,
-        cookie: token ? `qid=${ token }` : '',
+        Authorization: token ? `Bearer ${ token }` : '',
       },
     }
   })

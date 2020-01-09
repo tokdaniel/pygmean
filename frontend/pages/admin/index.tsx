@@ -1,17 +1,16 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
-import {
-  ThemeProvider,
-} from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/core/styles'
 import { NextPage } from 'next'
 import React from 'react'
 import Content from '~/components/content'
 import Copyright from '~/components/copyright'
 import Header from '~/components/header'
 import Navigator from '~/components/navigator'
+import { Role } from '~/generated/apollo-components'
 import useStyles, { drawerWidth } from './admin.styles'
 import theme from './admin.theme'
-import protect from  '~/utils/protected-page'
+import protect from '~/utils/protected-page'
 
 const AdminPage: NextPage = () => {
   const classes = useStyles()
@@ -52,11 +51,4 @@ const AdminPage: NextPage = () => {
   )
 }
 
-AdminPage.getInitialProps = () => {
-
-  return {
-    something: 'something'
-  }
-}
-
-export default protect(AdminPage, ['Admin'])
+export default protect(AdminPage, [Role.Admin])

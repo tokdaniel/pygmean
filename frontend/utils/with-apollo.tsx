@@ -10,7 +10,7 @@ import { getDataFromTree } from "react-apollo"
 import initApollo from '~/config/init-apollo'
 import { isBrowser } from "./is-browser"
 
-function parseCookies(req?: any, options = {}) {
+export function parseCookies(req?: any, options = {}) {
   return cookie.parse(
     req ? req.headers.cookie || "" : document.cookie,
     options,

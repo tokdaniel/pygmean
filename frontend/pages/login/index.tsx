@@ -17,6 +17,7 @@ import Copyright from '~/components/copyright'
 import { FormEvent } from '~/node_modules/@types/react'
 import { NextPage } from '~/node_modules/next'
 import useStyles from './sign-in.styles'
+import cookie from 'cookie'
 
 const LOGIN_MUTATION = gql`
     mutation($email: String!, $password: String!) {
@@ -39,7 +40,7 @@ const Login: NextPage = () => {
   const [password, setPassword] = useState('')
 
   if (data) {
-    localStorage.setItem('token', data.login.token)
+    document.cookie = cookie.serialize('token', data.login.token)
   }
 
   return (

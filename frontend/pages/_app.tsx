@@ -2,7 +2,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import App, { AppInitialProps } from 'next/app'
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import withApollo from '../utils/with-apollo'
+import withApollo from '~/utils/with-apollo'
 
 class MyApp extends App<any> {
   render() {
@@ -17,10 +17,10 @@ class MyApp extends App<any> {
 }
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
-  let appProps: AppInitialProps = { pageProps: {}}
+  let appProps: AppInitialProps = { pageProps: {} }
 
-  if(Component.getInitialProps) {
-    appProps.pageProps = await Component.getInitialProps(ctx);
+  if (Component.getInitialProps) {
+    appProps.pageProps = await Component.getInitialProps(ctx)
   }
 
   return appProps
