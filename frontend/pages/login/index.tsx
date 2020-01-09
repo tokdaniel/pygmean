@@ -16,11 +16,10 @@ import cookie from 'cookie'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import Copyright from '~/components/copyright'
-import paths from '~/config/paths'
+import { Path } from '~/config/path'
 import { FormEvent } from '~/node_modules/@types/react'
 import { NextPage } from '~/node_modules/next'
-import redirect from '~/utils/redirect'
-import { parseCookies } from '~/utils/with-apollo'
+import { redirectUser } from '~/utils/redirect'
 import useStyles from './sign-in.styles'
 
 const LOGIN_MUTATION = gql`
@@ -46,7 +45,7 @@ const Login: NextPage = () => {
 
   if (data) {
     document.cookie = cookie.serialize('token', data.login.token)
-    router.push(paths.HOME)
+    router.push(Path.HOME)
   }
 
   return (
@@ -125,13 +124,4 @@ const Login: NextPage = () => {
   )
 }
 
-Login.getInitialProps = async (ctx) => {
-  const token = parseCookies(ctx.req).token
-
-  if (token) {
-    redirect(ctx, paths.HOME)
-  }
-  return {}
-}
-
-export default Login
+export default redirectUser(Login, Path.HOME)

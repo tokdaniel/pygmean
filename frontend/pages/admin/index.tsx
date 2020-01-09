@@ -10,7 +10,7 @@ import Navigator from '~/components/navigator'
 import { Role } from '~/generated/apollo-components'
 import useStyles, { drawerWidth } from './admin.styles'
 import theme from './admin.theme'
-import protect from '~/utils/protected-page'
+import { restrict } from '~/utils/redirect'
 
 const AdminPage: NextPage = () => {
   const classes = useStyles()
@@ -51,4 +51,4 @@ const AdminPage: NextPage = () => {
   )
 }
 
-export default protect(AdminPage, [Role.Admin])
+export default restrict(AdminPage, [Role.Admin])

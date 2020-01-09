@@ -10,9 +10,11 @@ import Typography from '@material-ui/core/Typography'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import React from 'react'
 import Copyright from '~/components/copyright'
+import { Path } from '~/config/path'
+import { redirectUser } from '~/utils/redirect'
 import useStyles from './sign-up.styles'
 
-export default function SignUp() {
+const SignUp = () => {
   const classes = useStyles()
 
   return (
@@ -98,3 +100,5 @@ export default function SignUp() {
     </Container>
   )
 }
+
+export default redirectUser(SignUp, Path.HOME)
