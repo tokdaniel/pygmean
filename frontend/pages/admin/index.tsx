@@ -8,9 +8,9 @@ import Copyright from '~/components/copyright'
 import Header from '~/components/header'
 import Navigator from '~/components/navigator'
 import { Role } from '~/generated/apollo-components'
+import { restrict } from '~/utils/redirect'
 import useStyles, { drawerWidth } from './admin.styles'
 import theme from './admin.theme'
-import { restrict } from '~/utils/redirect'
 
 const AdminPage: NextPage = () => {
   const classes = useStyles()

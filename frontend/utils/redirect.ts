@@ -1,24 +1,23 @@
-import Router from "next/router";
+import { gql } from 'apollo-boost'
+import Router from "next/router"
 import initApollo from '~/config/init-apollo'
-import { Role } from '~/generated/apollo-components'
 import { Path } from '~/config/path'
+import { Role } from '~/generated/apollo-components'
 import { NextPage } from '~/node_modules/next'
 import { parseCookies } from '~/utils/with-apollo'
-import { gql } from 'apollo-boost'
-
 
 
 export const redirect = (context: any, target: string) => {
   if (context.res) {
     // server
     // 303: "See other"
-    context.res.writeHead(303, { Location: target });
-    context.res.end();
+    context.res.writeHead(303, { Location: target })
+    context.res.end()
   } else {
     // In the browser, we just pretend like this never even happened ;)
-    Router.replace(target);
+    Router.replace(target)
   }
-};
+}
 
 const GET_USER_ROLE = gql`
     query {
