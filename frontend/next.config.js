@@ -1,4 +1,10 @@
 const withCSS = require('@zeit/next-css')
-module.exports = withCSS({
+const withTM = require('next-transpile-modules');
+
+module.exports = withTM(withCSS({
   pageExtensions: ['tsx'],
-})
+  transpileModules: [
+    '@mui-treasury/layout',
+    '@mui-treasury/mockup'
+  ]
+}))
