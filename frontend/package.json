@@ -7,7 +7,7 @@
     "@apollo/react-hooks": "^3.1.3",
     "@material-ui/core": "^4.8.3",
     "@material-ui/icons": "^4.5.1",
-    "@mui-treasury/layout": "^3.3.0",
+    "@mui-treasury/layout": "^3.3.2",
     "@mui-treasury/mockup": "^0.4.0",
     "@zeit/next-css": "^1.0.1",
     "apollo-boost": "^0.4.7",

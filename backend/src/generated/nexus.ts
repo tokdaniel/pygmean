@@ -4,7 +4,7 @@
  */
 
 import * as Context from "../context"
-import * as photon from "@prisma/photon"
+import * as client from "@prisma/client"
 
 
 
@@ -23,7 +23,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  Role: photon.Role
+  Role: client.Role
 }
 
 export interface NexusGenRootTypes {
@@ -33,7 +33,7 @@ export interface NexusGenRootTypes {
   }
   Mutation: {};
   Query: {};
-  User: photon.User;
+  User: client.User;
   String: string;
   Int: number;
   Float: number;
@@ -60,7 +60,7 @@ export interface NexusGenFieldTypes {
   }
   User: { // field return type
     email: string; // String!
-    id: string; // ID!
+    id: string; // String!
     name: string | null; // String
     role: NexusGenEnums['Role']; // Role!
   }
@@ -80,8 +80,8 @@ export interface NexusGenArgTypes {
   }
   Query: {
     users: { // args
-      after?: string | null; // ID
-      before?: string | null; // ID
+      after?: string | null; // String
+      before?: string | null; // String
       first?: number | null; // Int
       last?: number | null; // Int
       skip?: number | null; // Int
