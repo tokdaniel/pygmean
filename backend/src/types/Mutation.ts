@@ -14,7 +14,7 @@ export const Mutation = mutationType({
       },
       resolve: async (_parent, { name, email, password }, ctx) => {
         const hashedPassword = await hash(password, 10)
-        const user = await ctx.photon.users.create({
+        const user = await ctx.client.users.create({
           data: {
             name,
             email,
@@ -36,7 +36,7 @@ export const Mutation = mutationType({
         password: stringArg({ nullable: false }),
       },
       resolve: async (_parent, { email, password }, context) => {
-        const user = await context.photon.users.findOne({
+        const user = await context.client.users.findOne({
           where: {
             email,
           },

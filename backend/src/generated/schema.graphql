@@ -14,7 +14,7 @@ type Mutation {
 
 type Query {
   me: User
-  users(after: ID, before: ID, first: Int, last: Int, skip: Int): [User!]!
+  users(after: String, before: String, first: Int, last: Int, skip: Int): [User!]!
 }
 
 enum Role {
@@ -24,7 +24,7 @@ enum Role {
 
 type User {
   email: String!
-  id: ID!
+  id: String!
   name: String
   role: Role!
 }

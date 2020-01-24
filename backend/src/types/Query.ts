@@ -8,7 +8,7 @@ export const Query = queryType({
       nullable: true,
       resolve: (parent, args, ctx) => {
         const userId = getUserId(ctx)
-        return ctx.photon.users.findOne({
+        return ctx.client.users.findOne({
           where: {
             id: userId,
           },

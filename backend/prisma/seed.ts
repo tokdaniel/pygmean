@@ -1,9 +1,9 @@
-import { Photon } from '@prisma/photon'
+import { PrismaClient } from '@prisma/client'
 
-const photon = new Photon()
+const client = new PrismaClient()
 
 async function main() {
-  const user1 = await photon.users.create({
+  const user1 = await client.users.create({
     data: {
       email: 'alice@prisma.io',
       name: 'Alice',
@@ -11,7 +11,7 @@ async function main() {
       role: 'User',
     },
   })
-  const user2 = await photon.users.create({
+  const user2 = await client.users.create({
     data: {
       email: 'bob@prisma.io',
       name: 'Bob',
@@ -23,5 +23,5 @@ async function main() {
 }
 
 main().finally(async () => {
-  await photon.disconnect()
+  await client.disconnect()
 })
