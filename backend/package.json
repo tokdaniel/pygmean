@@ -16,7 +16,7 @@
     "@prisma/client": "^2.0.0-preview020.2",
     "bcryptjs": "2.4.3",
     "graphql": "14.5.8",
-    "graphql-shield": "5.7.3",
+    "graphql-shield": "6.0.6",
     "graphql-yoga": "1.18.3",
     "jsonwebtoken": "8.5.1",
     "nexus": "0.12.0-rc.5",
